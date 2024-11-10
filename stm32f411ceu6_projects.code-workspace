@@ -1,16 +1,15 @@
 {
-	"folders": [
-		{
-			"path": "."
-		},
-		{
-			"name": "LightOn",
-			"path": "LightOn"
-		},
-		{
-			"name": "TimersBlink",
-			"path": "TimersBlink"
-		}
-	],
-	"settings": {}
+    "folders": [
+        {
+            "path": "."
+        },
+        {
+            "name": "Blink",
+            "path": "Blink"
+        },
+        {
+            "name": "TimersBlink",
+            "path": "TimersBlink"
+        }
+    ]
 }
