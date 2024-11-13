@@ -1,0 +1,3 @@
+This code configures Timer-4 output channels, connected to onboard GPIOS in ouput compare mode. Each Channel upon successful match, toggle one of the onboard LED.
+
+ref: https://github.com/kowalski100/STM32F4-HAL-Examples/blob/master/Timers-Output-Compare/Source/main.c
