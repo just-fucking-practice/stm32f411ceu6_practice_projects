@@ -58,28 +58,37 @@ static void initTimer(void)
   TIM_InitStruct.Init.CounterMode = TIM_COUNTERMODE_DOWN;
 #endif
 
-TIM_InitStruct.Init.Period = 8000;
+  /*
+      We want the time count to be 500msec (0.5-second).
+      As the input frequency is 16khz so the total
+      counts required for 500msec delay:
 
-while(HAL_TIM_Base_Init(&TIM_InitStruct) != HAL_OK);
+      total counts = 1000msec * f
+                    = (0.5 sec) * 16,000
+                    = 8,000
+  */
+  TIM_InitStruct.Init.Period = 8000;
 
-TIM_Channel_InitStruct.OCMode = TIM_OCMODE_TOGGLE;
-TIM_Channel_InitStruct.OCPolarity = TIM_OCPOLARITY_HIGH;
-TIM_Channel_InitStruct.OCFastMode = TIM_OCFAST_DISABLE;
+  while (HAL_TIM_Base_Init(&TIM_InitStruct) != HAL_OK);
 
-TIM_Channel_InitStruct.Pulse = 2000;
-HAL_TIM_OC_ConfigChannel(&TIM_InitStruct, &TIM_Channel_InitStruct, TIM_CHANNEL_1);
+  TIM_Channel_InitStruct.OCMode = TIM_OCMODE_TOGGLE;
+  TIM_Channel_InitStruct.OCPolarity = TIM_OCPOLARITY_HIGH;
+  TIM_Channel_InitStruct.OCFastMode = TIM_OCFAST_DISABLE;
 
-TIM_Channel_InitStruct.Pulse = 4000;
-HAL_TIM_OC_ConfigChannel(&TIM_InitStruct, &TIM_Channel_InitStruct, TIM_CHANNEL_2);
+  TIM_Channel_InitStruct.Pulse = 2000;
+  HAL_TIM_OC_ConfigChannel(&TIM_InitStruct, &TIM_Channel_InitStruct, TIM_CHANNEL_1);
 
-TIM_Channel_InitStruct.Pulse = 6000;
-HAL_TIM_OC_ConfigChannel(&TIM_InitStruct, &TIM_Channel_InitStruct, TIM_CHANNEL_3);
+  TIM_Channel_InitStruct.Pulse = 4000;
+  HAL_TIM_OC_ConfigChannel(&TIM_InitStruct, &TIM_Channel_InitStruct, TIM_CHANNEL_2);
 
-TIM_Channel_InitStruct.Pulse = 8000;
-HAL_TIM_OC_ConfigChannel(&TIM_InitStruct, &TIM_Channel_InitStruct, TIM_CHANNEL_4);
+  TIM_Channel_InitStruct.Pulse = 6000;
+  HAL_TIM_OC_ConfigChannel(&TIM_InitStruct, &TIM_Channel_InitStruct, TIM_CHANNEL_3);
 
-HAL_TIM_OC_Start(&TIM_InitStruct, TIM_CHANNEL_1);
-HAL_TIM_OC_Start(&TIM_InitStruct, TIM_CHANNEL_2);
-HAL_TIM_OC_Start(&TIM_InitStruct, TIM_CHANNEL_3);
-HAL_TIM_OC_Start(&TIM_InitStruct, TIM_CHANNEL_4);
+  TIM_Channel_InitStruct.Pulse = 8000;
+  HAL_TIM_OC_ConfigChannel(&TIM_InitStruct, &TIM_Channel_InitStruct, TIM_CHANNEL_4);
+
+  HAL_TIM_OC_Start(&TIM_InitStruct, TIM_CHANNEL_1);
+  HAL_TIM_OC_Start(&TIM_InitStruct, TIM_CHANNEL_2);
+  HAL_TIM_OC_Start(&TIM_InitStruct, TIM_CHANNEL_3);
+  HAL_TIM_OC_Start(&TIM_InitStruct, TIM_CHANNEL_4);
 }
